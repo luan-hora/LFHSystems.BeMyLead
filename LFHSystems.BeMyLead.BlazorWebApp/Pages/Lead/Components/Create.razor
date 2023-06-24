@@ -1,0 +1,69 @@
+﻿@page "/create"
+@using LFHSystems.BeMyLead.BlazorWebApp.Data.Lead;
+@inject LeadService leadService
+
+<h3>Create Lead</h3>
+
+<p>Want to be our new lead?</p>
+
+
+<EditForm Model="@lead" OnValidSubmit="InsertLead">
+    
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="lead.Name" />
+        </div>
+        <ValidationMessage For="@(() => lead.Name)" />
+    </div>
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="lead.Email" />
+        </div>
+        <ValidationMessage For="@(() => lead.Email)" />
+    </div>
+    <div class="mb-3">
+        <label for="Phone" class="form-label">Phone</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="lead.PhoneNumber" />
+        </div>
+        <ValidationMessage For="@(() => lead.PhoneNumber)" />
+    </div>
+    @*<div class="mb-3">  
+        <div class="form-group form-check col-md-11">
+            <label class="form-check-label">                
+                <InputCheckbox class="check" @bind-Value="lead.PrivacyPolicy"></InputCheckbox>
+                <ValidationMessage For="@(() => lead.PrivacyPolicy)" />
+            </label>
+        </div>
+        
+    </div>    
+    <div class="mb-3">
+        <div class="form-group form-check col-md-11">
+            <label for="WantsToReceiveAnnounces" class="form-check-label">                
+                <InputCheckbox class="check" @bind-Value="lead.WantsToReceiveAnnounces" ></InputCheckbox>                
+            </label>
+        </div>        
+    </div>*@
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Insert</button>
+        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
+@code {    
+    protected Lead lead = new();
+
+    protected async Task InsertLead()
+    {
+        await leadService.InsertLead(lead);
+    }
+
+    public void Cancel()
+    {
+        //NavigationManager.NavigateTo("/FetchLeads");
+    }
+}

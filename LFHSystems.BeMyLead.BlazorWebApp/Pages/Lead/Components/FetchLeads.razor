@@ -1,0 +1,66 @@
+﻿@page "/FetchLeads"
+@using LFHSystems.BeMyLead.BlazorWebApp.Data.Lead;
+@using static System.Net.WebRequestMethods;
+@inject LeadService leadService;
+@inject HttpClient Http;
+@inject IConfiguration _config;
+
+<PageTitle>Leads</PageTitle>
+
+<h1>Leads</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <a href='create' class="btn btn-primary" role="button">
+            <i class="fas fa-user-plus"></i>
+            Add Lead
+        </a>
+    </div>   
+</div>
+
+@if (leads == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Wants announces?</th>
+                <th>Privacy Policy?</th>
+                <th>Creation Date</th>
+                <th>Last Updated Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in leads)
+            {
+                <tr>
+                    <td>@client.ID</td>
+                    <td>@client.Name</td>
+                    <td>@client.Email</td>
+                    <td>@client.PhoneNumber</td>
+                    <td>@client.WantsToReceiveAnnounces</td>
+                    <td>@client.PrivacyPolicy</td>
+                    <td>@client.CreationDate</td>
+                    <td>@client.LastUpdatedDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Lead[]? leads;
+    protected override async Task OnInitializedAsync()
+    {   
+        leads = await Http.GetFromJsonAsync<Lead[]>($"{_config.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/GetExistingLeads");
+    }
+}
