@@ -7,9 +7,15 @@ using System.Threading.Tasks;
 namespace LFHSystems.BeMyLead.Model
 {
     public class LeadModel
-    {       
-        public LeadModel(string name, string email, string phoneNumber, bool wantsToReceiveAnnounces, bool privacyPolicy, DateTime creationDate, DateTime? lastUpdatedDate)
+    {
+        public LeadModel()
         {
+                
+        }
+
+        public LeadModel(string name, string email, string phoneNumber, bool wantsToReceiveAnnounces, bool privacyPolicy, DateTime creationDate, DateTime? lastUpdatedDate, int pId = 0)
+        {
+            this.ID = pId;
             this.Name = name;
             this.Email = email;
             this.PhoneNumber = phoneNumber;

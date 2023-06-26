@@ -1,14 +1,17 @@
-﻿@page "/create"
+﻿@page "/lead/create"
+@page "/lead/edit/{leadId:int}"
 @using LFHSystems.BeMyLead.BlazorWebApp.Data.Lead;
 @inject LeadService leadService
+@inject HttpClient Http;
+@inject IConfiguration _config;
 
-<h3>Create Lead</h3>
+<h3>@title Lead</h3>
 
 <p>Want to be our new lead?</p>
 
 
 <EditForm Model="@lead" OnValidSubmit="InsertLead">
-    
+
     <DataAnnotationsValidator />
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
@@ -31,35 +34,52 @@
         </div>
         <ValidationMessage For="@(() => lead.PhoneNumber)" />
     </div>
-    @*<div class="mb-3">  
-        <div class="form-group form-check col-md-11">
-            <label class="form-check-label">                
-                <InputCheckbox class="check" @bind-Value="lead.PrivacyPolicy"></InputCheckbox>
-                <ValidationMessage For="@(() => lead.PrivacyPolicy)" />
-            </label>
-        </div>
-        
-    </div>    
+    @*<div class="mb-3">
+    <div class="form-group form-check col-md-11">
+    <label class="form-check-label">
+    <InputCheckbox class="check" @bind-Value="lead.PrivacyPolicy"></InputCheckbox>
+    <ValidationMessage For="@(() => lead.PrivacyPolicy)" />
+    </label>
+    </div>
+
+    </div>
     <div class="mb-3">
-        <div class="form-group form-check col-md-11">
-            <label for="WantsToReceiveAnnounces" class="form-check-label">                
-                <InputCheckbox class="check" @bind-Value="lead.WantsToReceiveAnnounces" ></InputCheckbox>                
-            </label>
-        </div>        
+    <div class="form-group form-check col-md-11">
+    <label for="WantsToReceiveAnnounces" class="form-check-label">
+    <InputCheckbox class="check" @bind-Value="lead.WantsToReceiveAnnounces" ></InputCheckbox>
+    </label>
+    </div>
     </div>*@
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Insert</button>
+        <button type="submit" class="btn btn-primary">@title</button>
         <button class="btn btn-light" @onclick="Cancel">Cancel</button>
     </div>
 </EditForm>
 
-@code {    
+@code {
+    [Parameter]
+    public int leadId { get; set; }
+
+    protected string title = "Create";
+
     protected Lead lead = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (leadId != 0)
+        {
+            title = "Edit";
+            lead = await Http.GetFromJsonAsync<Lead>($"{_config.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/GetExistingLeadById/{leadId}") ?? new();
+        }
+    }
 
     protected async Task InsertLead()
     {
-        await leadService.InsertLead(lead);
+        if (lead.ID != 0)
+            await leadService.UpdateLead(lead);
+        else
+            await leadService.InsertLead(lead);
     }
 
     public void Cancel()

@@ -30,7 +30,7 @@ namespace LFHSystems.BeMyLead.BlazorWebApp.Data.Lead
         public string PhoneNumber { get; set; }
         [Display(Name = "I want to receive announces")]
         public bool WantsToReceiveAnnounces { get; set; }
-        [Compare("IsTrue", ErrorMessage = "Please agree to the Privacy Policy")]
+        //[Compare("IsTrue", ErrorMessage = "Please agree to the Privacy Policy")]
         [Display(Name = "I accept the Privacy Policy and consent to the processing of my personal information in accordance with it.")]
         public bool PrivacyPolicy { get; set; }
         public DateTime CreationDate { get; set; }

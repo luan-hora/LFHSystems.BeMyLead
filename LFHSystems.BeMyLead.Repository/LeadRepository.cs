@@ -1,6 +1,7 @@
 ﻿using LFHSystems.BeMyLead.Interface.Interfaces;
 using LFHSystems.BeMyLead.Model;
 using LFHSystems.BeMyLead.Repository.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace LFHSystems.BeMyLead.Repository
 {
@@ -24,7 +25,7 @@ namespace LFHSystems.BeMyLead.Repository
 
         public LeadModel GetByParameter(LeadModel pObj)
         {
-            throw new NotImplementedException();
+            return _ctx.Lead.FirstOrDefault(a => a.ID == pObj.ID) ?? new LeadModel();
         }
 
         public void Insert(ref LeadModel pObj)
@@ -35,7 +36,9 @@ namespace LFHSystems.BeMyLead.Repository
 
         public void Update(LeadModel pObj)
         {
-            throw new NotImplementedException();
+            //_ctx.Entry(pObj).State = EntityState.Modified;
+            _ctx.Lead.Update(pObj);
+            _ctx.SaveChanges();
         }
     }
 }

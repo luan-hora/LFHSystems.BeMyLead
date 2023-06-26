@@ -38,11 +38,32 @@ namespace LFHSystems.BeMyLead.BlazorWebApp.Data.Lead
             //return pageRet.ToArray();
         }
 
+        //public async Task<Lead> GetExistingLeadById(int pLeadId)
+        //{
+        //    Lead ret;
+
+        //    HttpClientJsonExtensions.GetFromJsonAsync<Lead>($"{_configuration.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/GetExistingLeads");
+
+        //    return ret;
+        //}
+
         public async Task InsertLead(Lead pObj)
         {
             try
             {   
                 leadBus.CreateNewLead(new LeadModel(pObj.Name, pObj.Email, pObj.PhoneNumber, pObj.WantsToReceiveAnnounces, pObj.PrivacyPolicy, pObj.CreationDate, null));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task UpdateLead(Lead pObj)
+        {
+            try
+            {
+                leadBus.UpdateExistingLead(new LeadModel(pObj.Name, pObj.Email, pObj.PhoneNumber, pObj.WantsToReceiveAnnounces, pObj.PrivacyPolicy, pObj.CreationDate, DateTime.Now, pObj.ID));
             }
             catch (Exception ex)
             {

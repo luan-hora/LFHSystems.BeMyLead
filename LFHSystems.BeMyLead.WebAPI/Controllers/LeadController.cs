@@ -25,6 +25,24 @@ namespace LFHSystems.BeMyLead.WebAPI.Controllers
             return Json(pLead);
         }
 
+        [HttpPost]
+        [Route("Update")]
+        public JsonResult Update([FromBody] LeadModel pLead)
+        {
+            repo.Update(pLead);
+            return Json(pLead);
+        }
+
+        [HttpGet]
+        [Route("GetExistingLeadById/{pId}")]
+        public JsonResult GetExistingLeadById(int pId)
+        {
+            LeadModel ret;
+            ret = repo.GetByParameter(new LeadModel() { ID= pId });
+
+            return Json(ret);
+        }
+
         [HttpGet]
         [Route("GetExistingLeads")]
         public JsonResult GetExistingLeads()

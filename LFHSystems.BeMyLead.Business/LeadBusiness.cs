@@ -31,6 +31,23 @@ namespace LFHSystems.BeMyLead.Business
                 throw;
             }
         }
+                
+        public LeadModel UpdateExistingLead(LeadModel pObj)
+        {
+            try
+            {
+                pObj.LastUpdatedDate = DateTime.Now;
+                StringContent content = new StringContent(pObj.ToJson(), Encoding.UTF8, "application/json");
+                string response = APIConsume.ApiPostAsync($"{_configuration.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/Update", content).Result;
+
+                return pObj;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         public List<LeadModel> GetExistingLeads()
         {
