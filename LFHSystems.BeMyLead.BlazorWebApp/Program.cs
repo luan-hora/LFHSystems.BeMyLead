@@ -1,5 +1,6 @@
 using LFHSystems.BeMyLead.BlazorWebApp.Data;
 using LFHSystems.BeMyLead.BlazorWebApp.Data.Lead;
+using LFHSystems.BeMyLead.BlazorWebApp.Services.ToastMessages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -11,6 +12,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<LeadService>();
 builder.Services.AddSingleton<HttpClient>();
+builder.Services.AddScoped<ToastService>();
 
 var app = builder.Build();
 
