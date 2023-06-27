@@ -1,0 +1,55 @@
+﻿@page "/lead/delete/{leadId:int}"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject LeadService leadService
+@inject HttpClient Http;
+@inject IConfiguration _config;
+@using LFHSystems.BeMyLead.BlazorWebApp.Data.Lead;
+
+<h3>Delete Lead</h3>
+<br />
+<div class="form-group">
+    <h4>Do you want to delete this lead?</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>@lead.Name</td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>@lead.Email</td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td>@lead.PhoneNumber</td>
+            </tr>            
+        </tbody>
+    </table>
+</div>
+<div class="form-group">
+    <input type="submit" value="Delete" @onclick="(async () => await RemoveLead(lead.ID))" class="btn btn-danger" />
+    <input type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-warning" />
+</div>
+
+@code {
+    [Parameter]
+    public int leadId { get; set; }
+    Lead lead = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        lead = await Http.GetFromJsonAsync<Lead>($"{_config.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/GetExistingLeadById/{leadId}") ?? new();
+    }
+
+    protected async Task RemoveLead(int pLeadId)
+    {
+        await Http.DeleteAsync($"{_config.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/DeleteExistingLead/{leadId}");
+        NavigationManager.NavigateTo("/FetchLeads");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/FetchLeads");
+    }
+}

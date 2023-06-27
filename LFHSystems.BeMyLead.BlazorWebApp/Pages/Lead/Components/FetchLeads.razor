@@ -33,8 +33,8 @@ else
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Wants announces?</th>
-                <th>Privacy Policy?</th>
+                @*<th>Wants announces?</th>
+                <th>Privacy Policy?</th>*@
                 <th>Creation Date</th>
                 <th>Last Updated Date</th>
             </tr>
@@ -48,12 +48,15 @@ else
                     <td>@client.Email</td>
                     <td>@client.PhoneNumber</td>
                     <td>@client.WantsToReceiveAnnounces</td>
-                    <td>@client.PrivacyPolicy</td>
-                    <td>@client.CreationDate</td>
+                    @*<td>@client.PrivacyPolicy</td>
+                    <td>@client.CreationDate</td>*@
                     <td>@client.LastUpdatedDate</td>
                     <td>
                         <a href="/lead/edit/@client.ID" role="button" class="btn btn-outline-dark">
                             Edit
+                        </a>
+                        <a href='/lead/delete/@client.ID' class="btn btn-outline-danger" role="button">
+                            Delete
                         </a>
                     </td>
                 </tr>
@@ -64,8 +67,31 @@ else
 
 @code {
     private Lead[]? leads;
+    private List<Lead> searchLeads = new();
+    protected Lead lead = new();
+    protected string SearchString { get; set; } = string.Empty;
+
     protected override async Task OnInitializedAsync()
     {   
         leads = await Http.GetFromJsonAsync<Lead[]>($"{_config.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/GetExistingLeads");
+        searchLeads = leads?.ToList() ?? new();
+    }
+
+    protected void FilterUser()
+    {
+        if (!string.IsNullOrEmpty(SearchString))
+        {
+            leads = searchLeads
+                .Where(x => x.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
+                .ToArray();
+        }
+        else
+        {
+            leads = searchLeads.ToArray();
+        }
+    }
+    protected void DeleteConfirm(int leadId)
+    {
+        lead = leads?.FirstOrDefault(x => x.ID == leadId) ?? new();
     }
 }

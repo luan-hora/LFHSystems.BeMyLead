@@ -11,19 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Core", "3 - Core", "{AC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Helper", "4 - Helper", "{B6578DAF-18A1-4221-B3FC-621353D62211}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFHSystems.BeMyLead.BlazorWebApp", "LFHSystems.BeMyLead.BlazorWebApp\LFHSystems.BeMyLead.BlazorWebApp.csproj", "{A81434B4-D959-4704-B92F-09846109FE18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFHSystems.BeMyLead.BlazorWebApp", "LFHSystems.BeMyLead.BlazorWebApp\LFHSystems.BeMyLead.BlazorWebApp.csproj", "{A81434B4-D959-4704-B92F-09846109FE18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFHSystems.BeMyLead.WebAPI", "LFHSystems.BeMyLead.WebAPI\LFHSystems.BeMyLead.WebAPI.csproj", "{DC1E552D-9A4F-4761-8BF7-2A9F4AA043E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFHSystems.BeMyLead.WebAPI", "LFHSystems.BeMyLead.WebAPI\LFHSystems.BeMyLead.WebAPI.csproj", "{DC1E552D-9A4F-4761-8BF7-2A9F4AA043E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFHSystems.BeMyLead.Business", "LFHSystems.BeMyLead.Business\LFHSystems.BeMyLead.Business.csproj", "{EAEEE9F1-6968-4E72-8A58-30A50D6EDB08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFHSystems.BeMyLead.Business", "LFHSystems.BeMyLead.Business\LFHSystems.BeMyLead.Business.csproj", "{EAEEE9F1-6968-4E72-8A58-30A50D6EDB08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFHSystems.BeMyLead.Model", "LFHSystems.BeMyLead.Model\LFHSystems.BeMyLead.Model.csproj", "{832079B3-D232-4C64-901D-7CF1F4A9BBA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFHSystems.BeMyLead.Model", "LFHSystems.BeMyLead.Model\LFHSystems.BeMyLead.Model.csproj", "{832079B3-D232-4C64-901D-7CF1F4A9BBA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFHSystems.BeMyLead.Repository", "LFHSystems.BeMyLead.Repository\LFHSystems.BeMyLead.Repository.csproj", "{5EB9F933-707C-47D6-A23B-32332EB9F88D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFHSystems.BeMyLead.Repository", "LFHSystems.BeMyLead.Repository\LFHSystems.BeMyLead.Repository.csproj", "{5EB9F933-707C-47D6-A23B-32332EB9F88D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFHSystems.BeMyLead.Interface", "LFHSystems.BeMyLead.Interface\LFHSystems.BeMyLead.Interface.csproj", "{96B68810-8512-4CFA-A12D-7301AB53CFEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFHSystems.BeMyLead.Interface", "LFHSystems.BeMyLead.Interface\LFHSystems.BeMyLead.Interface.csproj", "{96B68810-8512-4CFA-A12D-7301AB53CFEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFHSystems.BeMyLead.Utils", "LFHSystems.BeMyLead.Utils\LFHSystems.BeMyLead.Utils.csproj", "{43F9381E-DE47-40C2-B089-5C949D411D15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFHSystems.BeMyLead.Utils", "LFHSystems.BeMyLead.Utils\LFHSystems.BeMyLead.Utils.csproj", "{43F9381E-DE47-40C2-B089-5C949D411D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

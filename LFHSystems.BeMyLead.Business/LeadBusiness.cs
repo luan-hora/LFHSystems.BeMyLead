@@ -15,13 +15,13 @@ namespace LFHSystems.BeMyLead.Business
             this._configuration = configuration;
         }
 
-        public LeadModel CreateNewLead(LeadModel pObj)
+        public async Task<LeadModel> CreateNewLead(LeadModel pObj)
         {
             try
             {
                 pObj.CreationDate = DateTime.Now;
                 StringContent content = new StringContent(pObj.ToJson(), Encoding.UTF8, "application/json");
-                string response = APIConsume.ApiPostAsync($"{_configuration.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/Insert", content).Result;
+                string response = await APIConsume.ApiPostAsync($"{_configuration.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/Insert", content);
 
                 return pObj;
             }
@@ -32,13 +32,13 @@ namespace LFHSystems.BeMyLead.Business
             }
         }
                 
-        public LeadModel UpdateExistingLead(LeadModel pObj)
+        public async Task<LeadModel> UpdateExistingLead(LeadModel pObj)
         {
             try
             {
                 pObj.LastUpdatedDate = DateTime.Now;
                 StringContent content = new StringContent(pObj.ToJson(), Encoding.UTF8, "application/json");
-                string response = APIConsume.ApiPostAsync($"{_configuration.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/Update", content).Result;
+                string response = await APIConsume.ApiPostAsync($"{_configuration.GetSection("ApiAddresses:WebApiBeMyLead").Value}/Lead/Update", content);
 
                 return pObj;
             }

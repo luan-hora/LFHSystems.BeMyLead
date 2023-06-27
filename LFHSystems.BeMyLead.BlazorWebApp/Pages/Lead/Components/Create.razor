@@ -4,6 +4,7 @@
 @inject LeadService leadService
 @inject HttpClient Http;
 @inject IConfiguration _config;
+@inject NavigationManager NavigationManager
 
 <h3>@title Lead</h3>
 
@@ -80,10 +81,12 @@
             await leadService.UpdateLead(lead);
         else
             await leadService.InsertLead(lead);
+
+        Cancel();
     }
 
     public void Cancel()
     {
-        //NavigationManager.NavigateTo("/FetchLeads");
+        NavigationManager.NavigateTo("/FetchLeads");
     }
 }

@@ -15,7 +15,24 @@ namespace LFHSystems.BeMyLead.Repository
 
         public int Delete(LeadModel pObj)
         {
-            throw new NotImplementedException();
+            int ret;
+            try
+            {
+                LeadModel? lead = _ctx.Lead.Find(pObj.ID);
+                if (lead != null)
+                {
+                    _ctx.Lead.Remove(lead);
+                    ret = _ctx.SaveChanges();
+                }
+                else
+                    throw new ArgumentNullException();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return ret;
         }
 
         public IEnumerable<LeadModel> GetAll()

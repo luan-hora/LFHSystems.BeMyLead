@@ -20,7 +20,7 @@ namespace LFHSystems.BeMyLead.WebAPI.Controllers
         [HttpPost]
         [Route("Insert")]
         public JsonResult Insert([FromBody] LeadModel pLead)
-        {            
+        {
             repo.Insert(ref pLead);
             return Json(pLead);
         }
@@ -33,12 +33,20 @@ namespace LFHSystems.BeMyLead.WebAPI.Controllers
             return Json(pLead);
         }
 
+        [HttpDelete()]
+        [Route("DeleteExistingLead/{pId}")]
+        public IActionResult Delete(int pId)
+        {            
+            repo.Delete(new LeadModel() { ID = pId });
+            return Ok();
+        }
+
         [HttpGet]
         [Route("GetExistingLeadById/{pId}")]
         public JsonResult GetExistingLeadById(int pId)
         {
             LeadModel ret;
-            ret = repo.GetByParameter(new LeadModel() { ID= pId });
+            ret = repo.GetByParameter(new LeadModel() { ID = pId });
 
             return Json(ret);
         }
