@@ -6,6 +6,7 @@ namespace LFHSystems.BeMyLead.Repository.Contexts
     public class BeMyLeadDBContext : DbContext
     {
         public DbSet<LeadModel> Lead { get; set; }
+        public DbSet<LanguageModel> Language { get; set; }
         public BeMyLeadDBContext(DbContextOptions<BeMyLeadDBContext> options) : base(options)
         {
         }
